@@ -14,17 +14,30 @@ export default class ZenQuote extends Component {
   }
 
   // Runs third
-  // Note: best fetch data here
-  componentDidMount() {
-    axios.get("https://api.github.com/zen").then((response) => {
-      setTimeout(
-        function () {
-          this.setState({ quote: response.data, isLoaded: true });
-        }.bind(this),
-        3000
-      );
-    });
+  // Note: best to fetch data here
+
+  // Using async/await
+  async componentDidMount() {
+    let response = await axios.get("https://api.github.com/zen");
+    setTimeout(
+      function () {
+        this.setState({ quote: response.data, isLoaded: true });
+      }.bind(this),
+      3000
+    );
   }
+
+  // Using a promise
+  // componentDidMount() {
+  //   axios.get("https://api.github.com/zen").then((response) => {
+  //     setTimeout(
+  //       function () {
+  //         this.setState({ quote: response.data, isLoaded: true });
+  //       }.bind(this),
+  //       3000
+  //     );
+  //   });
+  // }
 
   // Runs second
   render() {
